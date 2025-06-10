@@ -1,0 +1,25 @@
+{
+        "profiles": {
+        "Siemens.Collaboration.Net.TiaPortal.Openness.CodeSnippets.Tests (local)": {
+        "commandName": "Executable",
+        "executablePath": "$(ExecutablePath)",
+        "commandLineArgs": "$(StartArguments)"
+        },
+        "Siemens.Collaboration.Net.TiaPortal.Openness.CodeSnippets.Tests (remote)": {
+        "commandName": "Executable",
+        "executablePath": "$(RemoteExecutablePath)",
+        "commandLineArgs": "$(RemoteStartArguments)",
+        "workingDirectory": "$(RemoteWorkingDirectoryPath)",
+        "remoteDebugEnabled": true,
+        "remoteDebugMachine": "$(RemoteDebugMachine)"
+        },
+        "Siemens.Collaboration.Net.TiaPortal.Openness.CodeSnippets.Tests (remote admin)": {
+        "commandName": "Executable",
+        "executablePath": "$(RemoteExecutablePath)",
+        "commandLineArgs": "$(RemoteStartArguments)",
+        "workingDirectory": "$(RemoteWorkingDirectoryPath)",
+        "remoteDebugEnabled": true,
+        "remoteDebugMachine": "$(RemoteDebugMachineAdmin)"
+        }
+        }
+        }

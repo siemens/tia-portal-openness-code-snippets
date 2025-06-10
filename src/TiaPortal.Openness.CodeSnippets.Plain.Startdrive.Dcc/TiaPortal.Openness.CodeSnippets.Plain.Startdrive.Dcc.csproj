@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InternalsVisible>true</InternalsVisible>
+    <TiaPortalLocation>$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP$(TiaVersion)\Global`, `Path`, '', RegistryView.Registry64, RegistryView.Registry32))</TiaPortalLocation>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Startdrive\resources\Startdrive.zap20" Link="resources\Startdrive.zap20">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="4.3.2" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <ProjectReference Include="..\TiaPortal.Openness.CodeSnippets.Plain.Setup\TiaPortal.Openness.CodeSnippets.Plain.Setup.csproj" />
+    <Reference Include="Siemens.Engineering">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\Siemens.Engineering.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <None Update="resources\DCC_Example.dcc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <PackageReference Update="NUnit3TestAdapter" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

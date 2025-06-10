@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<LangVersion>Latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Startdrive.Extensions" Version="$(TiaVersion).*" />
+		<PackageReference Include="Siemens.Collaboration.Net.NotifyModel " Version="*" />
+	</ItemGroup>
+</Project>

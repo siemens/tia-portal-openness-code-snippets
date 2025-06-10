@@ -1,0 +1,5 @@
+{
+    "changelogAll": true,
+    "projectFile": "Directory.Build.props",
+    "versionPrefix": "v"
+  }

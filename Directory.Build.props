@@ -1,0 +1,10 @@
+<Project>
+	<PropertyGroup>
+		<LangVersion>preview</LangVersion>
+		<GitVersioning>false</GitVersioning>
+		<TiaVersion>20</TiaVersion>
+		<DefineConstants>V$(TiaVersion)</DefineConstants>
+		<InternalsVisibleToTestProjects>true</InternalsVisibleToTestProjects>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+</Project>

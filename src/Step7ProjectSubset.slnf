@@ -1,0 +1,11 @@
+{
+  "solution": {
+    "path": "TiaPortal.Openness.CodeSnippets.sln",
+    "projects": [
+      "TiaPortal.Openness.CodeSnippets.Plain.Setup\\TiaPortal.Openness.CodeSnippets.Plain.Setup.csproj",
+      "TiaPortal.Openness.CodeSnippets.Plain.Step7\\TiaPortal.Openness.CodeSnippets.Plain.Step7.csproj",
+      "TiaPortal.Openness.CodeSnippets.WithExtensions.Setup\\TiaPortal.Openness.CodeSnippets.WithExtensions.Setup.csproj",
+      "TiaPortal.Openness.CodeSnippets.WithExtensions.Step7\\TiaPortal.Openness.CodeSnippets.WithExtensions.Step7.csproj"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InternalsVisible>true</InternalsVisible>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="4.3.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Extensions" Version="20.0.1744193698" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TiaPortal.Openness.CodeSnippets.WithExtensions.Setup\TiaPortal.Openness.CodeSnippets.WithExtensions.Setup.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Step7\resources\Step7.zap20" Link="resources\Step7.zap20">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
