@@ -57,7 +57,14 @@ public class SecuritySnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
     {
         var umacConfigurator = Project.GetService<UmacConfigurator>();
         var engineeringFunctionRights = umacConfigurator.EngineeringFunctionRights;
-        Assert.Pass(!engineeringFunctionRights.Any() ? "Project is unprotected" : "project is protected.");
+        if (engineeringFunctionRights.Any())
+        {
+            Console.WriteLine("Project is protected");
+        }
+        else
+        {
+            Console.WriteLine("Project is unprotected");
+        }
     }
 
     private static SecureString GetSecureString(string value)
