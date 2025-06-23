@@ -3,6 +3,7 @@
 
 using System.Security;
 using NUnit.Framework;
+using Siemens.Engineering;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 using Siemens.Engineering.Umac;
@@ -49,6 +50,14 @@ public class SecuritySnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         var masterSecretConfigurator = cpu.GetService<PlcMasterSecretConfigurator>();
         masterSecretConfigurator.Protect(secureString);
+    }
+
+    [Test]
+    public void IsProjectProtected()
+    {
+        var umacConfigurator = Project.GetService<UmacConfigurator>();
+        var engineeringFunctionRights = umacConfigurator.EngineeringFunctionRights;
+        Assert.Pass(!engineeringFunctionRights.Any() ? "Project is unprotected" : "project is protected.");
     }
 
     private static SecureString GetSecureString(string value)
