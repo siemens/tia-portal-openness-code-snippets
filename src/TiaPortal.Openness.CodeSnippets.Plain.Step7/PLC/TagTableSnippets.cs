@@ -19,7 +19,20 @@ public class TagTableSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
     public void EditExistingTags()
     {
         var plcDevice = Project.Devices.First(x => x.Name == "PLC_S120Democase");
+        var plcSoftware = plcDevice.DeviceItems[1].GetService<SoftwareContainer>().Software as PlcSoftware;
+        var myTagTable = plcSoftware?.TagTableGroup.TagTables.FirstOrDefault(x => x.Name == "DemocaseAppTagTable");
+        var myTag = myTagTable?.Tags.FirstOrDefault();
+        
+        if (myTag != null)
+        {
+            myTag.Name = "NewTagName2";
+        }
+    }
 
+    [Test]
+    public void EditExistingTagsViaExportImport()
+    {
+        var plcDevice = Project.Devices.First(x => x.Name == "PLC_S120Democase");
         var plcSoftware = plcDevice.DeviceItems[1].GetService<SoftwareContainer>().Software as PlcSoftware;
         var myTagTable = plcSoftware?.TagTableGroup.TagTables.FirstOrDefault(x => x.Name == "DemocaseAppTagTable");
 
