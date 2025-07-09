@@ -19,40 +19,24 @@ public abstract class BaseClass(string tiaArchiveName) : GlobalSetup
     public void OneTimeSetup()
     {
         var tiaProcesses = Siemens.Engineering.TiaPortal.GetProcesses();
-        if (tiaProcesses.Count > 0)
+        foreach (var tiaPortalProcess in tiaProcesses)
         {
-            foreach (var tiaPortalProcess in tiaProcesses)
+            TiaPortalInstance = tiaPortalProcess.Attach();
+            foreach (var project in TiaPortalInstance.Projects)
             {
-                TiaPortalInstance = tiaPortalProcess.Attach();
-                foreach (var project in TiaPortalInstance.Projects)
+                if (project.Name == tiaArchiveName.Remove(tiaArchiveName.IndexOf(".zap", StringComparison.Ordinal)))
                 {
-                    if (project.Name != tiaArchiveName.Remove(tiaArchiveName.IndexOf(".zap", StringComparison.Ordinal)))
-                    {
-                        Project = project;
-                        break;
-                    }
-
-                    TiaPortalInstance = new Siemens.Engineering.TiaPortal(TiaPortalMode.WithUserInterface);
+                    Project = project;
+                    return;
                 }
             }
         }
-        else
-        {
-            TiaPortalInstance = new Siemens.Engineering.TiaPortal(TiaPortalMode.WithUserInterface);
-            var resourceDict = Path.Combine(TestContext.CurrentContext.TestDirectory, "resources");
-            var myStep7ProjectArchivePath = Path.Combine(resourceDict, tiaArchiveName);
-            FileInfo sourcePath = new(myStep7ProjectArchivePath);
+        TiaPortalInstance = new Siemens.Engineering.TiaPortal(TiaPortalMode.WithUserInterface);
+        var resourceDict = Path.Combine(TestContext.CurrentContext.TestDirectory, "resources");
+        var myStep7ProjectArchivePath = Path.Combine(resourceDict, tiaArchiveName);
+        FileInfo sourcePath = new(myStep7ProjectArchivePath);
 
-            _tempProjectDirectory = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()));
-            Project = TiaPortalInstance.Projects.Retrieve(sourcePath, _tempProjectDirectory);
-        }
-    }
-
-    [OneTimeTearDown]
-    public void OneTimeTearDown()
-    {
-        //Project?.Close();
-        //Process.GetProcessById(TiaPortalInstance.GetCurrentProcess().Id).Kill();
-        //_tempProjectDirectory.Delete(true);
+        _tempProjectDirectory = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()));
+        Project = TiaPortalInstance.Projects.Retrieve(sourcePath, _tempProjectDirectory);
     }
 }
