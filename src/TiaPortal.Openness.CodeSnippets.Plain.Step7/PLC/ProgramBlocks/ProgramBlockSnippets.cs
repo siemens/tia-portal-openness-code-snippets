@@ -1,6 +1,7 @@
 ﻿// © Siemens 2025
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
+using System.Security;
 using NUnit.Framework;
 using Siemens.Engineering;
 using Siemens.Engineering.Compiler;
@@ -40,6 +41,8 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
         _blockComposition = software.BlockGroup.Blocks;
     }
 
+    // _blockComposition is initialized in the Setup method.
+    // The Setup method will be run before each test method.
     private PlcBlockComposition? _blockComposition;
 
     [Test]
@@ -65,6 +68,8 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
             var blockName = plcBlock.Name;
             var filePath = Path.Combine(importFolderPath, blockName);
 
+            // _blockComposition is initialized in the Setup method.
+            // The Setup method will be run before each test method.
             _blockComposition.Import(new FileInfo(filePath), ImportOptions.Override);
             editedBlockNames.Remove(blockName);
         });
@@ -77,20 +82,20 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
     {
         var importFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeImportFolderPath);
         var filePath = Path.Combine(importFolderPath, blockName);
+
+        // _blockComposition is initialized in the Setup method.
+        // The Setup method will be run before each test method.
         _blockComposition?.Import(new FileInfo(filePath), ImportOptions.Override);
     }
 
     [Test]
     public void ExportProgramBlock()
     {
-        var softwareContainer = Project.Devices
-            .First(x => x.Name.Equals("PLC_S120Democase"))
-            .DeviceItems
-            .First(x => x.Classification.Equals(DeviceItemClassifications.CPU)).GetService<SoftwareContainer>();
-
-        var software = softwareContainer.Software as PlcSoftware;
         FileInfo fileInfo = new(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()));
-        var block = software?.BlockGroup.Blocks.First(b => b.Name == "Axis_blue");
+
+        // _blockComposition is initialized in the Setup method.
+        // The Setup method will be run before each test method.
+        var block = _blockComposition.First(b => b.Name == "Axis_blue");
         var compiler = block?.GetService<ICompilable>();
         var result = compiler?.Compile();
 
@@ -101,5 +106,76 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
         Console.WriteLine($"File exists: {fileInfo.Exists}");
 
         fileInfo.Delete();
+    }
+
+    [Test]
+    public void ProtectPlcBlock()
+    {
+        // _blockComposition is initialized in the Setup method.
+        // The Setup method will be run before each test method.
+        var block = _blockComposition?.First(b => b.Name == "Axis_blue");
+        var plcBlockProtectionProvider = block?.GetService<PlcBlockProtectionProvider>();
+
+        // Get invalid password characters
+        var invalidChars = plcBlockProtectionProvider?.GetInvalidPasswordCharacters().ToList();
+        var validPassword = "@ValidPassword123";
+
+        var passwordIsValid = ValidatePassword(validPassword, invalidChars);
+        if (passwordIsValid)
+        {
+            var secureValidPassword = CreateSecureString(validPassword);
+            plcBlockProtectionProvider?.Protect(secureValidPassword);
+        }
+        else
+        {
+            Console.WriteLine("Password is invalid");
+        }
+    }
+
+    private static SecureString CreateSecureString(string password)
+    {
+        var securePassword = new SecureString();
+        foreach (var c in password)
+        {
+            securePassword.AppendChar(c);
+        }
+        securePassword.MakeReadOnly();
+        return securePassword;
+    }
+
+    private static bool ValidatePassword(string password, List<char> invalidChars)
+    {
+        //The password requirements:
+        //    The password must be at least 8 characters long.
+        //    The password must not exceed the maximum permissible length of 120 characters.
+        //    The password must contain at least one number.
+        //    The password must contain at least one special character.
+        //    The password must contain at least one lower-case and one upper -case character.
+
+        // Check for invalid characters
+        if (password.Any(invalidChars.Contains))
+            return false;
+
+        // Check length requirements
+        if (password.Length < 8 || password.Length > 120)
+            return false;
+
+        // Check for at least one number
+        if (!password.Any(char.IsDigit))
+            return false;
+
+        // Check for at least one lowercase character
+        if (!password.Any(char.IsLower))
+            return false;
+
+        // Check for at least one uppercase character
+        if (!password.Any(char.IsUpper))
+            return false;
+
+        // Check for at least one special character (non-alphanumeric)
+        if (password.All(char.IsLetterOrDigit))
+            return false;
+
+        return true;
     }
 }
