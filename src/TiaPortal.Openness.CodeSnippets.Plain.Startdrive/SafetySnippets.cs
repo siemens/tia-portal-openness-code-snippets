@@ -23,4 +23,25 @@ public class SafetySnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         Console.WriteLine($"CalculateCheckSum succeeded: {succeeded}");
     }
+
+    [Test]
+    public void SafetyIntegratedExampleNewGeneration_ActivateSTO()
+    {
+        var device = Project.Devices.First(x => x.Name == "SINAMICS S210V61");
+        var driveControl = device.DeviceItems.First();
+
+        var driveObject = driveControl.GetService<DriveObjectContainer>().DriveObjects.First();
+        var parameters = driveObject.Parameters;
+
+        //Enable Safety via ProfiSafe
+        parameters.Find("p9603").Bits.Single(x => x.Name == "p9603.1").Value = 1;
+
+        //Enable STO
+        parameters.Find("p9604").Bits.Single(x => x.Name == "p9604.0").Value = 1;
+
+        var driveFunctionInterface = driveObject.GetService<DriveFunctionInterface>();
+        var succeeded = driveFunctionInterface.SafetyCommissioning.UpdateCheckSums();
+
+        Console.WriteLine($"CalculateCheckSum succeeded: {succeeded}");
+    }
 }
