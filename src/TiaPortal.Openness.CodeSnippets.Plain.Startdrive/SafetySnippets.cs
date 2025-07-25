@@ -44,4 +44,17 @@ public class SafetySnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         Console.WriteLine($"CalculateCheckSum succeeded: {succeeded}");
     }
+
+    [Test]
+    public void SafetyIntegratedExampleS120_ActivateSTO()
+    {
+        var device = Project.Devices.First(x => x.Name == "S120Democase");
+        var axis = device.DeviceItems.First(x => x.Name == "RedAxis");
+
+        var driveObject = axis.GetService<DriveObjectContainer>().DriveObjects.First();
+        var parameters = driveObject.Parameters;
+
+        //Enable BasicSafety via ProfiSafe
+        parameters.Find("p9601").Bits.Single(x => x.Name == "p9601.3").Value = 1;
+    }
 }
