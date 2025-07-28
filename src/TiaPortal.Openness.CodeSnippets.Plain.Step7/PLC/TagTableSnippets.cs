@@ -4,15 +4,25 @@
 using System.Xml.Linq;
 using NUnit.Framework;
 using Siemens.Engineering;
-using Siemens.Engineering.CrossReference;
 using Siemens.Engineering.HW.Features;
 using Siemens.Engineering.SW;
 using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Step7.PLC;
+
 [TestFixture("Step7.zap20")]
 public class TagTableSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
+    [TearDown]
+    public void CleanupTempFile()
+    {
+        if (!string.IsNullOrEmpty(_lastTempPath) && File.Exists(_lastTempPath))
+        {
+            File.Delete(_lastTempPath);
+            _lastTempPath = null;
+        }
+    }
+
     private string _lastTempPath;
 
     [Test]
@@ -22,7 +32,7 @@ public class TagTableSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
         var plcSoftware = plcDevice.DeviceItems[1].GetService<SoftwareContainer>().Software as PlcSoftware;
         var myTagTable = plcSoftware?.TagTableGroup.TagTables.FirstOrDefault(x => x.Name == "DemocaseAppTagTable");
         var myTag = myTagTable?.Tags.FirstOrDefault();
-        
+
         if (myTag != null)
         {
             myTag.Name = "NewTagName2";
@@ -50,10 +60,10 @@ public class TagTableSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
         var plcTags = xdoc.Descendants("SW.Tags.PlcTag").ToList();
 
         var firstTag = plcTags.FirstOrDefault();
-        if(firstTag != null)
+        if (firstTag != null)
         {
             var nameElement = firstTag.Element("AttributeList")?.Element("Name");
-            if(nameElement != null)
+            if (nameElement != null)
             {
                 nameElement.Value = "NewTagName";
             }
@@ -64,15 +74,5 @@ public class TagTableSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         // Import the modified XML back into the tag table
         plcSoftware?.TagTableGroup.TagTables?.Import(new FileInfo(tempPath), ImportOptions.Override);
-    }
-
-    [TearDown]
-    public void CleanupTempFile()
-    {
-        if (!string.IsNullOrEmpty(_lastTempPath) && File.Exists(_lastTempPath))
-        {
-            File.Delete(_lastTempPath);
-            _lastTempPath = null;
-        }
     }
 }

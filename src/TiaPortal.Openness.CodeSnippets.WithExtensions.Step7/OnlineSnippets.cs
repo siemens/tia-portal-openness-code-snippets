@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Siemens.Engineering.Online;
 using TiaPortal.Openness.CodeSnippets.WithExtensions.Setup;
 
-namespace TiaPortal.Openness.CodeSnippets.Plain.Step7;
+namespace TiaPortal.Openness.CodeSnippets.WithExtensions.Step7;
 
 [TestFixture("Step7.zap20")]
 public class OnlineSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)

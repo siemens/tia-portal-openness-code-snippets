@@ -139,6 +139,7 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
         {
             securePassword.AppendChar(c);
         }
+
         securePassword.MakeReadOnly();
         return securePassword;
     }
@@ -154,27 +155,39 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
 
         // Check for invalid characters
         if (password.Any(invalidChars.Contains))
+        {
             return false;
+        }
 
         // Check length requirements
         if (password.Length < 8 || password.Length > 120)
+        {
             return false;
+        }
 
         // Check for at least one number
         if (!password.Any(char.IsDigit))
+        {
             return false;
+        }
 
         // Check for at least one lowercase character
         if (!password.Any(char.IsLower))
+        {
             return false;
+        }
 
         // Check for at least one uppercase character
         if (!password.Any(char.IsUpper))
+        {
             return false;
+        }
 
         // Check for at least one special character (non-alphanumeric)
         if (password.All(char.IsLetterOrDigit))
+        {
             return false;
+        }
 
         return true;
     }

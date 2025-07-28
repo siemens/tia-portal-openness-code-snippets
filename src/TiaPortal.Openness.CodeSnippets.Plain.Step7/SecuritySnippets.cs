@@ -3,7 +3,6 @@
 
 using System.Security;
 using NUnit.Framework;
-using Siemens.Engineering;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 using Siemens.Engineering.Umac;

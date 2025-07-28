@@ -31,6 +31,7 @@ public abstract class BaseClass(string tiaArchiveName) : GlobalSetup
                 }
             }
         }
+
         TiaPortalInstance = new Siemens.Engineering.TiaPortal(TiaPortalMode.WithUserInterface);
         var resourceDict = Path.Combine(TestContext.CurrentContext.TestDirectory, "resources");
         var myStep7ProjectArchivePath = Path.Combine(resourceDict, tiaArchiveName);
