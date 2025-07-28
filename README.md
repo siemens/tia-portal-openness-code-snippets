@@ -41,17 +41,23 @@ Follow these steps to set up and use the repository:
    cd tia-portal-openness-code-snippets
    ```
 
-2. Install Dependencies
-Ensure you have the required version of TIA Portal installed (see the "Requirements" section below).
+2. **Install Dependencies**
 
-3. Open the Solution
+    Ensure you have the required version of TIA Portal installed (see the "Requirements" section below).
 
-4. Run Tests
-Execute the test methods to explore the code snippets. Each snippet is designed to run independently.
+3. **Open the Solution**
 
-Based on your TIA Portal setup, open the appropriate solution file (.slnf or .sln) as described in the "Requirements" section.
-Run Tests
-Execute the test methods to explore the code snippets. Each snippet is designed to run independently.
+    Based on your TIA Portal setup, open the appropriate solution file (.slnf or .sln) as described in the "Requirements" section.
+
+4. **Run Tests**
+
+    Open the Test Explorer:
+
+    ![TestExplorerMenuEntry.png](docs/images/TestExplorerMenuEntry.png)
+
+    Execute the test methods to explore the code snippets. Each snippet is designed to run independently. Select one and click the Run button:
+
+    ![TestExplorerMethodSelection.png](docs/images/TestExplorerMethodSelection.png)
 
 ## Requirements
 
