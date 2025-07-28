@@ -4,6 +4,7 @@
 using NUnit.Framework;
 using Siemens.Engineering.MC.Drives;
 using Siemens.Engineering.MC.Drives.DFI;
+using Siemens.Engineering.MC.Drives.Enums;
 using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Startdrive;
@@ -44,6 +45,30 @@ public class SafetySnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         Console.WriteLine($"CalculateCheckSum succeeded: {succeeded}");
     }
+
+
+    [Test]
+    public void SafetyIntegratedExampleNewGeneration_ChangeAxisType()
+    {
+        var device = Project.Devices.First(x => x.Name == "SINAMICS S210V61");
+        var driveControl = device.DeviceItems.First();
+
+        var driveObject = driveControl.GetService<DriveObjectContainer>().DriveObjects.First();
+        var parameters = driveObject.Parameters;
+
+        //Enable Safety via ProfiSafe
+        parameters.Find("p9603").Bits.Single(x => x.Name == "p9603.1").Value = 1;
+
+        //Set Axis Type
+        var dfi = driveObject.GetService<DriveFunctionInterface>();
+        dfi.FunctionInUse.SetSIAxisType(RotaryLinearFlag.Linear);
+
+        var driveFunctionInterface = driveObject.GetService<DriveFunctionInterface>();
+        var succeeded = driveFunctionInterface.SafetyCommissioning.UpdateCheckSums();
+
+        Console.WriteLine($"CalculateCheckSum succeeded: {succeeded}");
+    }
+
 
     [Test]
     public void SafetyIntegratedExampleS120_ActivateSTO()
