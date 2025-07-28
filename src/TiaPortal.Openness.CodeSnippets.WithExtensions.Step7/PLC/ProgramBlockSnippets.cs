@@ -1,7 +1,6 @@
 ﻿// © Siemens 2025
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
-using System.IO;
 using NUnit.Framework;
 using Siemens.Engineering.SW.Blocks;
 using Siemens.Engineering.SW.ExternalSources;
@@ -54,5 +53,4 @@ public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveN
             Console.WriteLine($"Found program block: {programBlock.Name}");
         }
     }
-
 }

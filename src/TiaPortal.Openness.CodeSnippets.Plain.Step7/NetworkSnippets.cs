@@ -6,7 +6,7 @@ using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
-namespace TiaPortal.Openness.CodeSnippets.Plain.Startdrive;
+namespace TiaPortal.Openness.CodeSnippets.Plain.Step7;
 
 [TestFixture("Step7.zap20")]
 public class NetworkSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
