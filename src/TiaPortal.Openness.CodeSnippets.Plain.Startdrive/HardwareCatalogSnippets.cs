@@ -1,6 +1,7 @@
 ﻿// © Siemens 2025
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
+using System.Text;
 using NUnit.Framework;
 using Siemens.Engineering.HW;
 using TiaPortal.Openness.CodeSnippets.Plain.Setup;
@@ -15,14 +16,15 @@ public class HardwareCatalogSnippets(string tiaArchiveName) : BaseClass(tiaArchi
     {
         var hardwareCatalog = TiaPortalInstance.HardwareCatalog.Find(string.Empty);
 
-        var catalogEntries = hardwareCatalog.ToList();
+        var output = new StringBuilder();
+        output.AppendLine($"Total catalog entries: {hardwareCatalog.Count}");
 
-        Console.WriteLine($"Total catalog entries: {catalogEntries.Count}");
+        var entries = string.Join(Environment.NewLine,
+            hardwareCatalog.Select(entry =>
+                $"TypeIdentifier: {entry.TypeIdentifier}, CatalogPath: {entry.CatalogPath}"));
 
-        foreach (var entry in catalogEntries)
-        {
-            Console.WriteLine($"TypeIdentifier: {entry.TypeIdentifier}, CatalogPath: {entry.CatalogPath}");
-        }
+        output.AppendLine(entries);
+        Console.WriteLine(output.ToString());
     }
 
     [Test]
