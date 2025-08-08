@@ -1,6 +1,7 @@
 ﻿// © Siemens 2025
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
+using System.Globalization;
 using NUnit.Framework;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
@@ -16,10 +17,22 @@ public class NetworkSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
     {
         var device = Project.AllStartdriveDevices().First(x => x.Name.Equals("S120Democase"));
 
+        // Get TIA Portal Language and use for German "PROFINET-Schnittstelle" and English "PROFINET interface"
+        var localization = TiaPortalInstance.SettingsFolders.Find("General").Settings.Find("UserInterfaceLanguage").Value.ToString();
+        var culture = new CultureInfo(localization);
+
+        // Determine the appropriate PROFINET interface name based on the language
+        var profinetInterfaceName = culture.TwoLetterISOLanguageName.ToLowerInvariant() switch
+        {
+            "de" => "PROFINET-Schnittstelle",
+            "en" => "PROFINET interface",
+            _ => "PROFINET interface" // Default to English if language is not German or English
+        };
+
         //Set Ip Address:
         var node = device.NetworkInterfaces().Single(n =>
             n.InterfaceType == NetType.Ethernet && n.TryGetAttribute("TypeName", out string typeName) &&
-            typeName == "PROFINET interface").Nodes.First();
+            typeName == profinetInterfaceName).Nodes.First();
         node.SetAttribute("Address", "192.168.0.15");
 
         //Change PG/PC interface:
