@@ -50,6 +50,24 @@ public class HardwareSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
     }
 
     [Test]
+    public void CreateAndChangeMotor_S210()
+    {
+        // Create S210 Device
+        var s210TypeIdentifier = "OrderNumber:6SL3210-5HB10-1xFx/V5.2.3/S210";
+        var device = Project.Devices.CreateWithItem(s210TypeIdentifier, "S210_New", "S210_NewDevice");
+
+
+        // Remove existing "dummy" synchronous motor
+        var rack = device.DeviceItems.Single(x => x.TypeIdentifier.ToLower().Contains("system:rack"));
+        var existingMotor = rack.DeviceItems.Single(x => x.TypeIdentifier.ToLower().Contains("xxxxx-xxxx"));
+        existingMotor.Delete();
+
+        // Plug new Motor
+        var motorTypeIdentifier = "OrderNumber:1FK2102-0AG1x-xSxx";
+        var newMotor = rack.PlugNew(motorTypeIdentifier, "NewMotor", 65535);
+    }
+
+    [Test]
     public void G115DModuleCreation()
     {
         const string TypeIdentifier = "OrderNumber:6SL3500-0XE50-7FA_/-";
