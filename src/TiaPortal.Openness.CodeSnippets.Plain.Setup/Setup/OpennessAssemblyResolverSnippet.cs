@@ -19,11 +19,15 @@ public class OpennessAssemblyResolverSnippet
             return null;
         }
 
+        var assemblyVersion =
+            args.Name.Split(',').FirstOrDefault(x => x.Contains("Version")).Split('=')[1].Split('.')[0];
+
+
         using var regBaseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
             RegistryView.Registry64);
         using var opennessBaseKey = regBaseKey.OpenSubKey(SubKeyName);
         using var registryKeyLatestTiaVersion = opennessBaseKey?
-            .OpenSubKey(opennessBaseKey.GetSubKeyNames().Last());
+            .OpenSubKey(opennessBaseKey.GetSubKeyNames().FirstOrDefault(x => x.Contains(assemblyVersion)));
         var requestedVersionOfAssembly = assemblyName.Version.ToString();
 
         using var assemblyVersionSubKey = registryKeyLatestTiaVersion
