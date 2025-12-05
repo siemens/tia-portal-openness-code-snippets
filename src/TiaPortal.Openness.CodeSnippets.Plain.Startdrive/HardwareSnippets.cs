@@ -1,9 +1,12 @@
 ﻿// © Siemens 2025
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
+using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
+using Siemens.Engineering.MC.Drives;
+using Siemens.Engineering.MC.Drives.DFI;
 using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Startdrive;
@@ -68,7 +71,7 @@ public class HardwareSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
     }
 
     [Test]
-    public void G115DModuleCreation()
+    public void G115DModuleCreationWallMount()
     {
         const string TypeIdentifier = "OrderNumber:6SL3500-0XE50-7FA_/-";
 
@@ -77,5 +80,20 @@ public class HardwareSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
             .PlugNew(TypeIdentifier, "", 3);
 
         Console.WriteLine($"DeviceItem could be created: {deviceItem != null}");
+    }
+
+
+    [Test]
+    public void G115DModuleCreation_MotorMountWith_2KJ8()
+    {
+        const string TypeIdentifier = "OrderNumber:6SL3500-0XE50-7FA_/-";
+
+        var g115d = Project.Devices.CreateWithItem("OrderNumber:6SL3500-xxxxx-xFxx/4.7.14", "", "");
+
+        var driveObject = g115d.DeviceItems.Single(x => x.Classification == DeviceItemClassifications.HM)
+            .GetService<DriveObjectContainer>().DriveObjects.First();
+        var dfi = driveObject.GetService<DriveFunctionInterface>();
+
+        dfi.Commissioning.SetSimoGearMlfb("2KJ8001-2EA10-3FG1-D0X");
     }
 }
