@@ -8,7 +8,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Step7;
 
-[TestFixture("Startdrive.zap20")]
+[TestFixture("Startdrive.zap21")]
 public class HardwareCatalogSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]
