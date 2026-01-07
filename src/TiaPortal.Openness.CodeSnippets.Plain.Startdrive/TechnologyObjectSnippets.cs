@@ -1,7 +1,8 @@
-﻿// © Siemens 2025
+﻿// © Siemens 2025 - 2026
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
 using NUnit.Framework;
+using Siemens.Engineering;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 using Siemens.Engineering.MC.Drives;
@@ -12,7 +13,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Startdrive;
 
-[TestFixture("Startdrive.zap20")]
+[TestFixture("Startdrive.zap21")]
 public class TechnologyObjectSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]
@@ -28,12 +29,12 @@ public class TechnologyObjectSnippets(string tiaArchiveName) : BaseClass(tiaArch
         }
 
         var connectedDriveObject = GetConnectedDriveAxisFromToSmootherWay(to);
-        Console.WriteLine(connectedDriveObject.Parent.GetAttribute("Name"));
+        Console.WriteLine(connectedDriveObject.Parent.Parent.GetAttribute("Name"));
     }
 
-    public DriveObject? GetConnectedDriveAxisFromToSmootherWay(TechnologicalInstanceDB to)
+    private DriveObject? GetConnectedDriveAxisFromToSmootherWay(TechnologicalInstanceDB to)
     {
-        var plc = to.Parent as Device;
+        var plc = GetParentDevice(to) ?? throw new InvalidOperationException("Parent device not found.");
         var inputAddress = (int)to.GetService<AxisHardwareConnectionProvider>().ActorInterface
             .GetAttribute("InputAddress") / 8;
 
@@ -42,7 +43,7 @@ public class TechnologyObjectSnippets(string tiaArchiveName) : BaseClass(tiaArch
         var connectedIoDevices = connectedIoSystems.SelectMany(ioSystem => ioSystem.ConnectedIoDevices);
 
         var connectedSinamicsDevices = connectedIoDevices
-            .Select(ioConnector => ioConnector.Parent as Device)
+            .Select(GetParentDevice)
             .Where(IsSinamics)
             .ToList();
 
@@ -58,6 +59,16 @@ public class TechnologyObjectSnippets(string tiaArchiveName) : BaseClass(tiaArch
         }
 
         return connectedDriveObject;
+    }
+
+    private Device? GetParentDevice(IEngineeringObject engineeringObject)
+    {
+        while (engineeringObject != null && engineeringObject is not Device)
+        {
+            engineeringObject = engineeringObject.Parent;
+        }
+        
+        return (Device?)engineeringObject;
     }
 
     private static IEnumerable<IoSystem> GetAllConnectedIoSystems(DeviceItem deviceItem)

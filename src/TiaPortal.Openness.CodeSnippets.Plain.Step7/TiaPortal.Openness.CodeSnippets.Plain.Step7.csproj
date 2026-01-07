@@ -6,26 +6,42 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InternalsVisible>true</InternalsVisible>
-    <TiaPortalLocation>$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP$(TiaVersion)\Global`, `Path`, '', RegistryView.Registry64, RegistryView.Registry32))</TiaPortalLocation>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NUnit" Version="4.3.2" />
-    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0"/>
+
     <ProjectReference Include="..\TiaPortal.Openness.CodeSnippets.Plain.Setup\TiaPortal.Openness.CodeSnippets.Plain.Setup.csproj" />
-    <Reference Include="Siemens.Engineering">
-      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\Siemens.Engineering.dll</HintPath>
-      <Private>False</Private>
-      <SpecificVersion></SpecificVersion>
-    </Reference>
-    <PackageReference Update="NUnit3TestAdapter" Version="5.0.0" />
   </ItemGroup>
+
+  <!--Relevant Siemens Engineering dll references-->
+  <ItemGroup>
+    <Reference Include="Siemens.Engineering.Base">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\net48\Siemens.Engineering.Base.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+
+    <Reference Include="Siemens.Engineering.Step7">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\net48\Siemens.Engineering.Step7.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+
+    <Reference Include="Siemens.Engineering.Safety">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\net48\Siemens.Engineering.Safety.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
   <ItemGroup>
     <None Update="PLC\ProgramBlocks\Resources\PLCBlocks\*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Update="resources\Step7.zap20">
+    <None Update="resources\Step7.zap21">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

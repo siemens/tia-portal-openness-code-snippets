@@ -91,6 +91,6 @@ We welcome contributions to improve this repository! Here's how you can contribu
 
 ## License
 
-© Siemens 2025
+© Siemens 2025 - 2026
 
 Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See [LICENSE.md](/LICENSE.md).

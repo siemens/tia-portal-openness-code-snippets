@@ -1,4 +1,4 @@
-﻿// © Siemens 2025
+﻿// © Siemens 2025 - 2026
 // Licensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 
 using NUnit.Framework;
@@ -7,7 +7,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Step7;
 
-[TestFixture("Step7.zap20")]
+[TestFixture("Step7.zap21")]
 public class LibrarySnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]

@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
-    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Startdrive.Extensions" Version="20.0.1744193698" />
+    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Startdrive.Extensions" Version="21.0.1765368573" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Startdrive\resources\Startdrive.zap20" Link="resources\Startdrive.zap20">
+    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Startdrive\resources\Startdrive.zap21" Link="resources\Startdrive.zap21">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

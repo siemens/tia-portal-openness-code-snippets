@@ -12,6 +12,6 @@
   <ItemGroup>
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
-    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Extensions" Version="20.0.1744193698" />
+    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Extensions" Version="21.0.1765368043" />
   </ItemGroup>
 </Project>
