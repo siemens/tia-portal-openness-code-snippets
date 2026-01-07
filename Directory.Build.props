@@ -3,7 +3,8 @@
 		<LangVersion>preview</LangVersion>
 		<GitVersioning>false</GitVersioning>
 		<TiaVersion>20</TiaVersion>
-		<DefineConstants>V$(TiaVersion)</DefineConstants>
+    <TiaPortalLocation>$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP$(TiaVersion)\Global`, `Path`, '', RegistryView.Registry64, RegistryView.Registry32))</TiaPortalLocation>
+    <DefineConstants>V$(TiaVersion)</DefineConstants>
 		<InternalsVisibleToTestProjects>true</InternalsVisibleToTestProjects>
 		<Version>1.0.0</Version>
 	</PropertyGroup>

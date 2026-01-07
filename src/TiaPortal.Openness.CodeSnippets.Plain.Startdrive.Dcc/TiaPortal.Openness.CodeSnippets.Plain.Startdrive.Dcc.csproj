@@ -6,7 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InternalsVisible>true</InternalsVisible>
-    <TiaPortalLocation>$([MSBuild]::GetRegistryValueFromView(`HKEY_LOCAL_MACHINE\SOFTWARE\Siemens\Automation\_InstalledSW\TIAP$(TiaVersion)\Global`, `Path`, '', RegistryView.Registry64, RegistryView.Registry32))</TiaPortalLocation>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Startdrive\resources\Startdrive.zap20" Link="resources\Startdrive.zap20">
