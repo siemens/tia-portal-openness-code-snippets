@@ -8,7 +8,7 @@ namespace TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 public class OpennessAssemblyResolverSnippet
 {
-    private const string SiemensEngineeringDllName = "Siemens.Engineering";
+    private const string SiemensEngineeringDllName = "Siemens.Engineering.Base";
     private const string SubKeyName = @"SOFTWARE\Siemens\Automation\Openness";
 
     public static Assembly ResolveSiemensEngineeringAssembly(object sender, ResolveEventArgs args)
@@ -32,7 +32,8 @@ public class OpennessAssemblyResolverSnippet
 
         using var assemblyVersionSubKey = registryKeyLatestTiaVersion
             ?.OpenSubKey("PublicAPI")
-            ?.OpenSubKey(requestedVersionOfAssembly);
+            ?.OpenSubKey(requestedVersionOfAssembly)
+            ?.OpenSubKey("net48");
         var siemensEngineeringAssemblyPath = assemblyVersionSubKey?
             .GetValue(SiemensEngineeringDllName).ToString();
         if (siemensEngineeringAssemblyPath == null
