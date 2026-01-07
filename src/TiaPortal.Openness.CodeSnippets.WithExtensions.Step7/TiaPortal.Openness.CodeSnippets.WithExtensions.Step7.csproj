@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
-    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Extensions" Version="20.0.1744193698" />
+    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Extensions" Version="21.0.1765368043" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TiaPortal.Openness.CodeSnippets.WithExtensions.Setup\TiaPortal.Openness.CodeSnippets.WithExtensions.Setup.csproj" />
@@ -18,7 +18,7 @@
     <Folder Include="resources\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Step7\resources\Step7.zap20" Link="resources\Step7.zap20">
+    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Step7\resources\Step7.zap21" Link="resources\Step7.zap21">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

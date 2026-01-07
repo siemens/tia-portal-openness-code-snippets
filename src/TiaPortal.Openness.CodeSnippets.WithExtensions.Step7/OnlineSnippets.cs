@@ -7,7 +7,7 @@ using TiaPortal.Openness.CodeSnippets.WithExtensions.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.WithExtensions.Step7;
 
-[TestFixture("Step7.zap20")]
+[TestFixture("Step7.zap21")]
 public class OnlineSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]

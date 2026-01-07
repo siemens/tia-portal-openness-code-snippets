@@ -8,7 +8,7 @@ using Mode = Siemens.Collaboration.Net.TiaPortal.Openness.Resolver.Mode;
 
 namespace TiaPortal.Openness.CodeSnippets.WithExtensions.Step7;
 
-[TestFixture("Step7.zap20")]
+[TestFixture("Step7.zap21")]
 public class Step7Snippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]
