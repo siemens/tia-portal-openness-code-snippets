@@ -167,7 +167,7 @@ dotnet_diagnostic.xUnit2029.severity = none
 
 # CSharp code style settings:
 [*.cs]
-file_header_template = © Siemens 2025\nLicensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
+file_header_template = © Siemens 2025 - 2026\nLicensed under: "Royalty-free Software provided by Siemens on sharing platforms for developers/users of Siemens products". See LICENSE.md.
 dotnet_diagnostic.IDE0073.severity = warning
 
 # Newline settings
