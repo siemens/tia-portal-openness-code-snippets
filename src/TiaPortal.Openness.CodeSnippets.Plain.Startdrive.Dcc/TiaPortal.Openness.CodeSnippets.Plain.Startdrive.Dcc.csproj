@@ -7,24 +7,44 @@
     <Nullable>enable</Nullable>
     <InternalsVisible>true</InternalsVisible>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Startdrive\resources\Startdrive.zap20" Link="resources\Startdrive.zap20">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="NUnit" Version="4.3.2" />
-    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+
     <ProjectReference Include="..\TiaPortal.Openness.CodeSnippets.Plain.Setup\TiaPortal.Openness.CodeSnippets.Plain.Setup.csproj" />
-    <Reference Include="Siemens.Engineering">
-      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\Siemens.Engineering.dll</HintPath>
+
+  </ItemGroup>
+
+  <!--Relevant Siemens Engineering dll references-->
+  <ItemGroup>
+    <Reference Include="Siemens.Engineering.Base">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\net48\Siemens.Engineering.Base.dll</HintPath>
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+
+    <Reference Include="Siemens.Engineering.DCC">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\net48\Siemens.Engineering.DCC.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+
+    <Reference Include="Siemens.Engineering.Startdrive">
+      <HintPath>$(TiaPortalLocation)\PublicAPI\V$(TiaVersion)\net48\Siemens.Engineering.Startdrive.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\TiaPortal.Openness.CodeSnippets.Plain.Startdrive\resources\Startdrive.zap21" Link="resources\Startdrive.zap21">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="resources\DCC_Example.dcc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <PackageReference Update="NUnit3TestAdapter" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

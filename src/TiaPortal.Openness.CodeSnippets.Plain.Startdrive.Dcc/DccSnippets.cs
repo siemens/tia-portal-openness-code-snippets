@@ -8,7 +8,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.StartDrive.Dcc;
 
-[TestFixture("Startdrive.zap20")]
+[TestFixture("Startdrive.zap21")]
 public class DccSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]
