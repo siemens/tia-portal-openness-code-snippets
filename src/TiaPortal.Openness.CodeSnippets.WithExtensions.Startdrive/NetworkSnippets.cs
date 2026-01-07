@@ -9,7 +9,7 @@ using TiaPortal.Openness.CodeSnippets.WithExtensions.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Startdrive;
 
-[TestFixture("Startdrive.zap20")]
+[TestFixture("Startdrive.zap21")]
 public class NetworkSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]

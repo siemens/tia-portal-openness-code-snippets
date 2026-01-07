@@ -6,7 +6,7 @@ using TiaPortal.Openness.CodeSnippets.WithExtensions.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.WithExtensions.Startdrive;
 
-[TestFixture("Startdrive.zap20")]
+[TestFixture("Startdrive.zap21")]
 public class ParameterSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]
