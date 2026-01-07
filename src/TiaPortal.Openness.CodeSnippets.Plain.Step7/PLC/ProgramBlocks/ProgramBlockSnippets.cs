@@ -13,7 +13,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Step7.PLC.ProgramBlocks;
 
-[TestFixture("Step7.zap20")]
+[TestFixture("Step7.zap21")]
 public class ProgramBlockSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [SetUp]

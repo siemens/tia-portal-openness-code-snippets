@@ -11,7 +11,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Step7.PLC;
 
-[TestFixture("Step7.zap20")]
+[TestFixture("Step7.zap21")]
 public class PlcAlarmTextListSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]

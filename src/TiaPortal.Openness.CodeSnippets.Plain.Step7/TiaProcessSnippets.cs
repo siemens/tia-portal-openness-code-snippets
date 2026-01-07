@@ -7,7 +7,7 @@ using TiaPortal.Openness.CodeSnippets.Plain.Setup;
 
 namespace TiaPortal.Openness.CodeSnippets.Plain.Step7;
 
-[TestFixture("Step7.zap20")]
+[TestFixture("Step7.zap21")]
 public class TiaProcessSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 {
     [Test]
@@ -38,7 +38,7 @@ public class TiaProcessSnippets(string tiaArchiveName) : BaseClass(tiaArchiveNam
         // Start a new TIA Portal
         Siemens.Engineering.TiaPortal tia = new(TiaPortalMode.WithUserInterface);
         var myStep7ProjectArchivePath =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "Step7.zap20");
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "Step7.zap21");
         FileInfo sourcePath = new(myStep7ProjectArchivePath);
         DirectoryInfo targetPath = new(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()));
 
@@ -54,10 +54,10 @@ public class TiaProcessSnippets(string tiaArchiveName) : BaseClass(tiaArchiveNam
     {
         var project = Project;
         project.Save();
-        project.Archive(new DirectoryInfo(Path.GetTempPath()), "dummy.zap20",
+        project.Archive(new DirectoryInfo(Path.GetTempPath()), "dummy.zap21",
             ProjectArchivationMode.Compressed);
 
-        var fileInfo = new FileInfo(Path.Combine(Path.GetTempPath(), "dummy.zap20"));
+        var fileInfo = new FileInfo(Path.Combine(Path.GetTempPath(), "dummy.zap21"));
         if (fileInfo.Exists)
         {
             fileInfo.Delete();
