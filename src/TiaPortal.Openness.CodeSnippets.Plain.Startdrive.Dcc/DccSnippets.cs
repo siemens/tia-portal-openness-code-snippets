@@ -58,4 +58,28 @@ public class DccSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         Console.WriteLine($"Exported dcc plan exists: {exportDccPath.Exists}");
     }
+
+    [Test]
+    public void CreateDccChart_AddBlock_InterconnectParameter()
+    {
+        var device = Project.Devices.First(x => x.Name.Contains("S120Democase"));
+        var axis = device.DeviceItems.First(x => x.Name.Contains("BlueAxis"));
+        var driveObjectContainer = axis.GetService<DriveObjectContainer>();
+        var driveObject = driveObjectContainer.DriveObjects.First();
+
+        var chartContainer = driveObject.GetService<DriveControlChartContainer>();
+        var chart = chartContainer.Charts.Create("NewChartFromCode");
+
+        var dccBlock1 = chart.Blocks.Create("ADD");
+
+        var pin = dccBlock1.Pins.First(x => x.Name.Equals("X1"));
+        pin.Publish(true, 21500);
+
+        var dccParameter = driveObject.Parameters.Find("p21500");
+
+        var parameterToConnect = driveObject.Parameters.Find("r21");
+
+        dccParameter.Value = parameterToConnect;
+    }
+
 }
