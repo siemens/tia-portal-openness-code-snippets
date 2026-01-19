@@ -94,4 +94,26 @@ public class HardwareSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         dfi.Commissioning.SetSimoGearMlfb("2KJ8001-2EA10-3FG1-D0X");
     }
+
+
+    [TestCase("AxisWith3rdPartyMotor", "OrderNumber:6SL3120-1TE28-5Axx")]
+    [TestCase("RedAxis", "OrderNumber:6SL3120-2TE15-0Axx//10012")] //Testcase for double motor module, it's irrelevant which of the axes is selected, it works for both
+    [Test]
+    public void ChangeTypeIdentifier_MotorModuleS120(string motorModuleName, string newTypeIdentifier)
+    {
+        var device = Project.Devices.First(x => x.Name == "S120Democase");
+
+        var driveAxis = device.DeviceItems.Single(n => n.Name == motorModuleName);
+        var driveAxisModule = driveAxis.DeviceItems[0];
+
+        var currentTypeIdentifier = driveAxisModule.TypeIdentifier;
+        Console.WriteLine($"Current TypeIdentifier: {currentTypeIdentifier}");
+
+        var driveItemModule = driveAxisModule.GetService<DriveItemHardwareModule>();
+        driveItemModule.ChangeType(newTypeIdentifier);
+
+        var updatedTypeIdentifier = driveAxisModule.TypeIdentifier;
+        Console.WriteLine($"Updated TypeIdentifier: {updatedTypeIdentifier}");
+    }
+
 }
