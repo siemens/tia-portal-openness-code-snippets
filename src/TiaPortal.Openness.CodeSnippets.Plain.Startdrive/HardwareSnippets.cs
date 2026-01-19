@@ -94,4 +94,46 @@ public class HardwareSnippets(string tiaArchiveName) : BaseClass(tiaArchiveName)
 
         dfi.Commissioning.SetSimoGearMlfb("2KJ8001-2EA10-3FG1-D0X");
     }
+
+
+
+    [Test]
+    public void ChangeTypeIdentifier_SingleMotorModuleS120()
+    {
+        var device = Project.Devices.First(x => x.Name == "S120Democase");
+
+        var driveAxis = device.DeviceItems.Single(n => n.Name == "AxisWith3rdPartyMotor");
+        var driveAxisModule = driveAxis.DeviceItems[0];
+
+        var currentTypeIdentifier = driveAxisModule.TypeIdentifier;
+        Console.WriteLine($"Current TypeIdentifier of single motor module: {currentTypeIdentifier}");
+
+        var newTypeIdentifier = "OrderNumber:6SL3120-1TE28-5Axx";
+        var driveItemModule = driveAxisModule.GetService<DriveItemHardwareModule>();
+        driveItemModule.ChangeType(newTypeIdentifier);
+
+        var updatedTypeIdentifier = driveAxisModule.TypeIdentifier;
+        Console.WriteLine($"Updated TypeIdentifier of single motor module: {updatedTypeIdentifier}");
+    }
+
+    [Test]
+    public void ChangeTypeIdentifier_DoubleMotorModuleS120()
+    {
+        var device = Project.Devices.First(x => x.Name == "S120Democase");
+
+        //it is irrelevant which of the both drive axes are selected for changing the type identifier, both work the same
+        var driveAxis = device.DeviceItems.Single(n => n.Name == "RedAxis");
+        var driveAxisModule = driveAxis.DeviceItems[0];
+
+        var currentTypeIdentifier = driveAxisModule.TypeIdentifier;
+        Console.WriteLine($"Current TypeIdentifier of double motor module: {currentTypeIdentifier}");
+
+        var newTypeIdentifier = "OrderNumber:6SL3120-2TE15-0Axx//10012";
+        var driveItemModule = driveAxisModule.GetService<DriveItemHardwareModule>();
+        driveItemModule.ChangeType(newTypeIdentifier);
+
+        var updatedTypeIdentifier = driveAxisModule.TypeIdentifier;
+        Console.WriteLine($"Updated TypeIdentifier of double motor module: {updatedTypeIdentifier}");
+    }
+
 }
