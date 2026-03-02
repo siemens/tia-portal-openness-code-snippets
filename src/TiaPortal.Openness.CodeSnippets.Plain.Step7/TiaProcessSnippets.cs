@@ -65,6 +65,18 @@ public class TiaProcessSnippets(string tiaArchiveName) : BaseClass(tiaArchiveNam
     }
 
     [Test]
+    public void ExitAndCloseTiaPortal()
+    {
+        var project = Project;
+
+        project.Save();
+        project.Close();
+
+        var tia = TiaPortalInstance;
+        tia.GetCurrentProcess().Dispose();
+    }
+
+    [Test]
     public void ExclusiveAccess()
     {
         using var exclusiveAccess = TiaPortalInstance.ExclusiveAccess("Test");
