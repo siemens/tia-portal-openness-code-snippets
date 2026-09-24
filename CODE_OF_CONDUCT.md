@@ -1,4 +1,4 @@
-# Code of Conduct - UseCaseBasedDoku Modular Application Creator Module Builder
+# Code of Conduct - TIA Portal Openness Code Snippets
 
 ## Our Pledge
 
