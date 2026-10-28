@@ -11,7 +11,7 @@
 
 ## Goal
 
-This repository provides small, easy-to-understand code snippets demonstrating how to work with the latest TIA Portal Openness API (currently V20).
+This repository provides small, easy-to-understand code snippets demonstrating how to work with the latest TIA Portal Openness API (currently V21).
 
 Use this repository to learn and experiment with the TIA Portal Openness API in a modular way.
 
@@ -22,7 +22,7 @@ Use this repository to learn and experiment with the TIA Portal Openness API in 
 
 ## Features
 
-- Modular code snippets for TIA Portal Openness API (V20).
+- Modular code snippets for TIA Portal Openness API (V21).
 - Automatically starts a TIA Portal instance if not already running.
 - Test methods for easy execution and experimentation.
 - Support for different TIA Portal setups:
@@ -61,9 +61,18 @@ Follow these steps to set up and use the repository:
 
 ## Requirements
 
+### Software
+
+- **Windows with TIA Portal V21**, including TIA Portal Openness. The projects find the TIA Portal installation through the registry and reference the Openness assemblies in `<TIA Portal installation folder>\PublicAPI\V21\net48`, so they build only on a machine where TIA Portal V21 is installed.
+- **Membership in the Windows user group "Siemens TIA Openness"**. Openness refuses access to users outside this group. Sign out and back in after adding your user.
+- **Visual Studio 2022** with the **.NET desktop development** workload, which provides the .NET Framework 4.8 targeting pack. The projects are SDK-style projects that target .NET Framework 4.8 (`net48`) and run their snippets through the Visual Studio Test Explorer (NUnit).
+- **Access to nuget.org** for the first build, to restore NUnit and the `Siemens.Collaboration.Net` packages.
+
+### Solution to open
+
 To build the project, select the appropriate solution filter file (`.slnf`) or the full solution file (`.sln`) based on your TIA Portal installation setup:
 
-### 1. Installed Step7
+#### 1. Installed Step7
 
 Use the following solution filter file: [Step7ProjectSubset.slnf](src/Step7ProjectSubset.slnf)
 
@@ -71,7 +80,7 @@ Use the following solution filter file: [Step7ProjectSubset.slnf](src/Step7Proje
 
 ---
 
-### 2. Installed Step7 + Startdrive
+#### 2. Installed Step7 + Startdrive
 
 Use the following solution filter file: [StartdriveProjectSubset.slnf](src/StartdriveProjectSubset.slnf)
 
@@ -79,7 +88,7 @@ Use the following solution filter file: [StartdriveProjectSubset.slnf](src/Start
 
 ---
 
-### 3. Installed Step7 + Startdrive + Dcc
+#### 3. Installed Step7 + Startdrive + Dcc
 
 Use the full solution file: [TiaPortal.Openness.CodeSnippets.sln](src/TiaPortal.Openness.CodeSnippets.sln)
 
